@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pardeep.jcaimvvmpractice.UiState
 import com.pardeep.jcaimvvmpractice.data.apiDataModels.ApiDataModelItem
+import com.pardeep.jcaimvvmpractice.data.apiDataModels.Data
+import com.pardeep.jcaimvvmpractice.data.apiDataModels.UpdateRequest
 import com.pardeep.jcaimvvmpractice.data.dataRepository.AllObjectRepoImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -49,6 +51,27 @@ class HomeScreenViewModel(
     fun updateTextField(newValue: String) {
         _textFieldData.value = newValue
         fetchData(newValue)
+    }
+
+    fun updateDataRequest(id:Int) {
+        val objectData = UpdateRequest(
+            name = "UpdateData",
+            data = Data(
+                color = "Red",
+                description = "Update the data by api hitting"
+
+            )
+        )
+        viewModelScope.launch {
+            try {
+                allObjectRepoImpl.UpdateData(
+                    id,
+                    objectData = objectData,
+                )
+            } catch (e: Exception) {
+                Log.e("UpdateError", e.message ?: "Unknown Error")
+            }
+        }
     }
 
 

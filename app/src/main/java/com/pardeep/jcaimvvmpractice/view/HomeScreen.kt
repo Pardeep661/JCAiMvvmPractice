@@ -1,5 +1,6 @@
 package com.pardeep.jcaimvvmpractice.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -84,6 +85,11 @@ fun HomeUi(modifier: Modifier = Modifier) {
                                             .height(70.dp)
                                             .clip(RoundedCornerShape(15.dp))
                                             .padding(horizontal = 5.dp)
+                                            .clickable(
+                                                onClick = {
+                                                    homeScreenViewModel.updateDataRequest(index)
+                                                }
+                                            )
                                     ) {
                                         Row(
                                             modifier = Modifier.fillMaxWidth(),
